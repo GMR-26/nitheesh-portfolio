@@ -3,102 +3,467 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nitheesh James - Portfolio</title>
+  <title>Nitheesh James - Automotive Program Manager</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    :root {
+      --primary: #0056b3; /* Ford blue */
+      --secondary: #2c3e50;
+      --accent: #e74c3c;
+      --light: #ecf0f1;
+      --dark: #2c3e50;
+      --gray: #95a5a6;
+    }
+    
+    @keyframes accelerateIn {
+      0% { transform: translateX(-100%); opacity: 0; }
+      100% { transform: translateX(0); opacity: 1; }
+    }
+    
+    @keyframes shiftGear {
+      0% { transform: scale(0.95); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    
+    @keyframes roadLines {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 40px; }
+    }
+    
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       line-height: 1.6;
       margin: 0;
       padding: 0;
-      background: #f9f9f9;
+      background: #f8f9fa;
       color: #333;
+      overflow-x: hidden;
     }
+    
     header {
-      background: #003366;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
       color: white;
-      padding: 20px;
+      padding: 3rem 2rem;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+      animation: accelerateIn 0.8s ease-out forwards;
     }
+    
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        linear-gradient(90deg, 
+          rgba(255,255,255,0.1) 1px, 
+          transparent 1px) 0 0 / 40px 40px,
+        linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px) 0 0 / 40px 40px;
+      animation: roadLines 2s linear infinite;
+    }
+    
+    h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      position: relative;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    header p {
+      font-size: 1.2rem;
+      margin: 0.5rem 0 0;
+      font-weight: 300;
+      position: relative;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+    
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
     section {
-      padding: 20px;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid #e1e1e1;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease-out;
     }
+    
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    section:last-child {
+      border-bottom: none;
+    }
+    
     h2 {
-      color: #003366;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+      transition: all 0.3s ease;
     }
+    
+    h2:hover {
+      transform: translateX(5px);
+    }
+    
+    h2::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    
+    h2:hover::after {
+      width: 80px;
+    }
+    
+    h3 {
+      color: var(--secondary);
+      margin: 1.5rem 0 0.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    h3:hover {
+      color: var(--primary);
+      transform: translateX(3px);
+    }
+    
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    
+    ul li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    ul li:hover {
+      transform: translateX(5px);
+    }
+    
+    ul li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      transition: all 0.3s ease;
+    }
+    
+    ul li:hover::before {
+      transform: scale(1.3);
+    }
+    
+    .skills-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    
+    .skill-category {
+      flex: 1;
+      min-width: 250px;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.4s ease;
+    }
+    
+    .skill-category:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .skill-category h4 {
+      margin-top: 0;
+      color: var(--primary);
+      border-bottom: 1px solid #eee;
+      padding-bottom: 0.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .skill-category:hover h4 {
+      color: var(--accent);
+    }
+    
+    .experience-item {
+      background: white;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: relative;
+      transition: all 0.4s ease;
+    }
+    
+    .experience-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .experience-item::before {
+      content: "";
+      position: absolute;
+      top: 2rem;
+      left: -1.5rem;
+      width: 1rem;
+      height: 1rem;
+      background: var(--accent);
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+    
+    .experience-item:hover::before {
+      transform: scale(1.3);
+      box-shadow: 0 0 10px rgba(231, 76, 60, 0.6);
+    }
+    
+    .timeline {
+      color: var(--gray);
+      font-style: italic;
+      margin-bottom: 0.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .experience-item:hover .timeline {
+      color: var(--primary);
+    }
+    
     footer {
-      background: #333;
+      background: var(--secondary);
       color: white;
       text-align: center;
-      padding: 10px;
+      padding: 2rem 0;
+      margin-top: 2rem;
+      position: relative;
+      overflow: hidden;
     }
-    ul {
-      list-style: square;
-      padding-left: 20px;
+    
+    footer::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      animation: roadLines 1.5s linear infinite;
+    }
+    
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    
+    .contact-links a {
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+    
+    .contact-links a:hover {
+      color: var(--accent);
+      transform: translateY(-3px);
+    }
+    
+    .contact-links i {
+      margin-right: 8px;
+    }
+    
+    .gear-icon {
+      position: absolute;
+      right: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.5rem;
+      opacity: 0.2;
+      animation: spin 8s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: translateY(-50%) rotate(0deg); }
+      100% { transform: translateY(-50%) rotate(360deg); }
+    }
+    
+    @media (max-width: 768px) {
+      .skills-container {
+        flex-direction: column;
+      }
+      
+      .experience-item::before {
+        left: -0.5rem;
+      }
+      
+      .gear-icon {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Nitheesh James</h1>
-    <p>Program Manager & Business Analyst</p>
+    <div class="container">
+      <h1>Nitheesh James</h1>
+      <p>Program Manager & Business Analyst</p>
+      <i class="fas fa-cog gear-icon"></i>
+    </div>
   </header>
 
-  <section id="summary">
-    <h2>Summary</h2>
-    <p>
-      Accomplished Program Manager and Business Analyst with 8+ years of experience in the automotive industry. Skilled in program coordination, business analysis, and delivering strategic results.
-    </p>
-  </section>
+  <div class="container">
+    <section id="summary">
+      <h2>Summary</h2>
+      <p>
+        Accomplished Program Manager and Business Analyst with 8+ years of experience in the automotive industry. Skilled in program coordination, business analysis, and delivering strategic results.
+      </p>
+    </section>
 
-  <section id="skills">
-    <h2>Skills</h2>
-    <ul>
-      <li><strong>Program Management:</strong> Program Mgmt, Time Mgmt, APQP, Change Mgmt, Budgeting</li>
-      <li><strong>Business Analysis:</strong> Business Admin, SCCAF, PFMEA, Control Plan, MSA, PPAP</li>
-      <li><strong>Technical:</strong> MS Office, Autocad 2D, CATIA V5, Ariba</li>
-      <li><strong>Collaboration:</strong> Customer and Supplier Coordination</li>
-    </ul>
-  </section>
+    <section id="skills">
+      <h2>Skills</h2>
+      <div class="skills-container">
+        <div class="skill-category">
+          <h4><i class="fas fa-project-diagram"></i> Program Management</h4>
+          <ul>
+            <li>Program Management</li>
+            <li>Time Management</li>
+            <li>APQP</li>
+            <li>Change Management</li>
+            <li>Budgeting</li>
+          </ul>
+        </div>
+        
+        <div class="skill-category">
+          <h4><i class="fas fa-chart-line"></i> Business Analysis</h4>
+          <ul>
+            <li>Business Administration</li>
+            <li>SCCAF</li>
+            <li>PFMEA</li>
+            <li>Control Plan</li>
+            <li>MSA</li>
+            <li>PPAP</li>
+          </ul>
+        </div>
+        
+        <div class="skill-category">
+          <h4><i class="fas fa-tools"></i> Technical</h4>
+          <ul>
+            <li>MS Office</li>
+            <li>Autocad 2D</li>
+            <li>CATIA V5</li>
+            <li>Ariba</li>
+          </ul>
+        </div>
+        
+        <div class="skill-category">
+          <h4><i class="fas fa-handshake"></i> Collaboration</h4>
+          <ul>
+            <li>Customer Coordination</li>
+            <li>Supplier Coordination</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-  <section id="experience">
-    <h2>Work Experience</h2>
+    <section id="experience">
+      <h2>Work Experience</h2>
 
-    <h3>Ford Motor Company – Senior Analyst (Dec 2022 – Present)</h3>
-    <ul>
-      <li>Directed program management for European programs into IMG markets.</li>
-      <li>Defined product requirements with JV partners.</li>
-      <li>Handled program launch milestones and approvals.</li>
-      <li>Managed budget and governance processes.</li>
-    </ul>
+      <div class="experience-item">
+        <h3><i class="fas fa-car-side"></i> Ford Motor Company – Senior Analyst</h3>
+        <div class="timeline">December 2022 – Present</div>
+        <ul>
+          <li>Directed program management for European programs into IMG markets.</li>
+          <li>Defined product requirements with JV partners.</li>
+          <li>Handled program launch milestones and approvals.</li>
+          <li>Managed budget and governance processes.</li>
+        </ul>
+      </div>
 
-    <h3>Ford Motor Company – Business Analyst (Jun 2020 – Dec 2022)</h3>
-    <ul>
-      <li>Managed purchase orders via Ariba.</li>
-      <li>SPOC for ISO audits and MCRP audits.</li>
-      <li>Led reporting and dashboard creation using internal tools.</li>
-      <li>Facilitated leadership meetings and communications.</li>
-    </ul>
+      <div class="experience-item">
+        <h3><i class="fas fa-car-side"></i> Ford Motor Company – Business Analyst</h3>
+        <div class="timeline">June 2020 – December 2022</div>
+        <ul>
+          <li>Managed purchase orders via Ariba.</li>
+          <li>SPOC for ISO audits and MCRP audits.</li>
+          <li>Led reporting and dashboard creation using internal tools.</li>
+          <li>Facilitated leadership meetings and communications.</li>
+        </ul>
+      </div>
 
-    <h3>Motherson Automotive – Program Mgmt Engineer (Mar 2017 – Apr 2020)</h3>
-    <ul>
-      <li>Led completion of Ford B562 MCA tooling project.</li>
-      <li>Handled engineering change requests post-launch.</li>
-      <li>Maintained NPD and Change Mgmt documentation (IATF 16949).</li>
-      <li>Coordinated with cross-functional teams.</li>
-    </ul>
-  </section>
+      <div class="experience-item">
+        <h3><i class="fas fa-car-side"></i> Motherson Automotive – Program Management Engineer</h3>
+        <div class="timeline">March 2017 – April 2020</div>
+        <ul>
+          <li>Led completion of Ford B562 MCA tooling project.</li>
+          <li>Handled engineering change requests post-launch.</li>
+          <li>Maintained NPD and Change Management documentation (IATF 16949).</li>
+          <li>Coordinated with cross-functional teams.</li>
+        </ul>
+      </div>
+    </section>
 
-  <section id="education">
-    <h2>Education</h2>
-    <ul>
-      <li>MBA – Bharathiyar University, Tamil Nadu – 2022</li>
-      <li>B.E. Mechanical Engineering – CSI College Of Engineering, Ooty – 2016</li>
-      <li>Diploma – Govt. of Kerala, Thrissur – 2013</li>
-    </ul>
-  </section>
+    <section id="education">
+      <h2>Education</h2>
+      <ul>
+        <li><strong><i class="fas fa-graduation-cap"></i> MBA</strong> – Bharathiyar University, Tamil Nadu – 2022</li>
+        <li><strong><i class="fas fa-graduation-cap"></i> B.E. Mechanical Engineering</strong> – CSI College Of Engineering, Ooty – 2016</li>
+        <li><strong><i class="fas fa-graduation-cap"></i> Diploma</strong> – Govt. of Kerala, Thrissur – 2013</li>
+      </ul>
+    </section>
+  </div>
 
   <footer>
-    <p>Contact: LinkedIn | Email (you@example.com)</p>
+    <div class="container">
+      <h3>Get In Touch</h3>
+      <div class="contact-links">
+        <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        <a href="mailto:you@example.com"><i class="fas fa-envelope"></i> Email</a>
+        <a href="#"><i class="fas fa-file-pdf"></i> Resume</a>
+      </div>
+      <p style="margin-top: 1.5rem; font-size: 0.9rem;">&copy; 2023 Nitheesh James. All rights reserved.</p>
+      <i class="fas fa-cog gear-icon"></i>
+    </div>
   </footer>
+
+  <script>
+    // Scroll animation for sections
+    document.addEventListener('DOMContentLoaded', function() {
+      const sections = document.querySelectorAll('section');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      sections.forEach(section => {
+        observer.observe(section);
+      });
+      
+      // Add slight delay to each section for sequential animation
+      sections.forEach((section, index) => {
+        section.style.transitionDelay = `${index * 0.1}s`;
+      });
+    });
+  </script>
 </body>
 </html>
